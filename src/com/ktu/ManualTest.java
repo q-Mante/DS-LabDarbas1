@@ -5,8 +5,10 @@
  *************************************************************************** */
 package com.ktu;
 
+import util.ArrayStack;
 import util.Ks;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Locale;
 
 public class ManualTest {
@@ -55,7 +57,7 @@ public class ManualTest {
         cars.println("Pirmi 3 auto");
         cars.add("Renault Laguna 2001 115900 7500");
         cars.add("Renault Megane 1946 365100 9500");
-        cars.add("Honda   Civic  2007  36400 8500,3");
+        cars.add("Honda Civic 2007 36400 8500.3");
 
         cars.println("Visi 6 auto");
         cars.forEach(System.out::println);
@@ -67,18 +69,40 @@ public class ManualTest {
                 + (cars.get(3).getPrice() + cars.get(4).getPrice()
                 + cars.get(5).getPrice()));
         // palaipsniui atidenkite sekančias eilutes ir išbandykite
-//        cars.add(0, new Car("Mazda","6",2007,50000,27000));
-//        cars.add(6, new Car("Hyundai","Lantra",1998,9500,777));
-//        cars.set(4, c3);
-//        cars.println("Po įterpimų");
-//        cars.remove(7);
-//        cars.remove(0);
-//        cars.println("Po išmetimų");
-//        cars.remove(0); cars.remove(0); cars.remove(0);
-//        cars.remove(0); cars.remove(0); cars.remove(0);
-//        cars.println("Po visų išmetimų");
-//        cars.remove(0);
-//        cars.println("Po visų išmetimų");
+        cars.add(0, new Car("Mazda","6",2007,50000,27000));
+        cars.add(6, new Car("Hyundai","Lantra",1998,9500,777));
+        cars.set(4, c3);
+        cars.println("Po įterpimų");
+        cars.remove(7);
+        cars.remove(0);
+        cars.println("Po išmetimų");
+        cars.remove(0); cars.remove(0); cars.remove(0);
+        cars.remove(0); cars.remove(0); cars.remove(0);
+        cars.println("Po visų išmetimų");
+        cars.remove(0);
+        cars.println("Po visų išmetimų");
+        /*Iterator<Car> it = cars.iterator();
+        while (it.hasNext()) {
+            Car element = it.next();
+            if (element.equals(c3))
+                it.remove();
+        }
+        cars.println();*/
+
+        ArrayStack<Car> a = new ArrayStack<>();
+        Ks.oun(a.isEmpty());
+        a.push(c1);
+        a.push(c2);
+        a.push(c3);
+        Ks.oun(a.pop());
+        Ks.oun(a.peak());
+        a.push(c1);
+        Ks.oun(a.peak());
+        Ks.oun(a.isEmpty());
+        Ks.oun(a.pop());
+        Ks.oun(a.pop());
+        Ks.oun(a.pop());
+        Ks.oun(a.isEmpty());
     }
 
     void countRenault() {

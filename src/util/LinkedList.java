@@ -72,7 +72,17 @@ public class LinkedList<E extends Comparable<E>>
         if (k < 0 || k >= size) {
             return false;
         }
-        throw new UnsupportedOperationException("Studentams reikia realizuoti add(int k, E e)");
+        //throw new UnsupportedOperationException("Studentams reikia realizuoti add(int k, E e)");
+
+        size ++;
+        if (k == 0) {
+            first = new Node<>(e, first);
+        }
+        else {
+            Node<E> prev = first.findNode(k - 1);
+            prev.next = new Node<>(e, prev.next);
+        }
+        return true;
     }
 
     /**
@@ -129,7 +139,15 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E set(int k, E e) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti set(int k, E e)");
+        //throw new UnsupportedOperationException("Studentams reikia realizuoti set(int k, E e)");
+        if (k < 0 || k >= size)
+            //throw new IndexOutOfBoundsException("Index k out of bounds in set(int k, E e)");
+            return null;    // jeigu nuliniai objektai nėra priimami add(E e) metode, tuomet ką šitoje vietoje gražinti?
+
+        Node<E> curr = first.findNode(k);
+        E temp = curr.element;
+        curr.element = e;
+        return temp;
     }
 
     /**
@@ -157,7 +175,24 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E remove(int k) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(int k)");
+        //throw new UnsupportedOperationException("Studentams reikia realizuoti remove(int k)");
+        if (k < 0 || k >= size)
+            //throw new IndexOutOfBoundsException("Index k out of bounds in remove(int k)");
+            return null;    // jeigu nuliniai objektai nėra priimami add(E e) metode, tuomet ką šitoje vietoje gražinti?
+
+        size--;
+        E temp = first.element;
+        if (k == 0) {
+            first = first.next;
+        }
+        else {
+            Node<E> prev = first.findNode(k - 1);
+            temp = prev.next.element;
+            prev.next = prev.next.next;
+            if (prev.next == null)
+                last = prev;
+        }
+        return temp;
     }
 
     /**
@@ -317,7 +352,28 @@ public class LinkedList<E extends Comparable<E>>
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Studentams reikia realizuoti remove()");
+            //throw new UnsupportedOperationException("Studentams reikia realizuoti remove()");
+
+            Node<E> delete = first;
+            while (delete.next != null && delete.next != iterPosition) {
+                delete = delete.next;
+            }
+
+            if (delete == first) {
+                first = first.next;
+            }
+            else {
+                for (Node<E> e1 = first; e1 != null; e1 = e1.next) {
+                    if (e1.next == delete) {
+                        e1.next = delete.next;
+                        if (e1.next == null) {
+                            last = e1;
+                        }
+                    }
+                }
+            }
+
+            size--;
         }
     }
 
