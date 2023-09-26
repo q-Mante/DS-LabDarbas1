@@ -7,6 +7,8 @@ package com.ktu;
 
 import util.ArrayStack;
 import util.Ks;
+import util.LinkedListStack;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Locale;
@@ -103,6 +105,23 @@ public class ManualTest {
         Ks.oun(a.pop());
         Ks.oun(a.pop());
         Ks.oun(a.isEmpty());
+
+        Ks.oun("    ");
+
+        LinkedListStack<Car> b = new LinkedListStack<>();
+        Ks.oun(b.isEmpty());
+        b.push(c1);
+        b.push(c2);
+        b.push(c3);
+        Ks.oun(b.pop());
+        Ks.oun(b.peak());
+        b.push(c1);
+        Ks.oun(b.peak());
+        Ks.oun(b.isEmpty());
+        Ks.oun(b.pop());
+        Ks.oun(b.pop());
+        Ks.oun(b.pop());
+        Ks.oun(b.isEmpty());
     }
 
     void countRenault() {
