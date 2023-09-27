@@ -16,9 +16,8 @@ public class LinkedListStack<E> implements Stack<E> {
         if (Linked.isEmpty())
             throw new EmptyStackException();
 
-        E temp = Linked.getFirst();
-        Linked.removeFirst();
-        return temp;
+        //E temp = Linked.getFirst();
+        return Linked.removeFirst();
     }
 
     @Override

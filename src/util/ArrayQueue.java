@@ -10,12 +10,13 @@ public class ArrayQueue<E> implements Queue<E> {
 
     public ArrayQueue() {
         Array = new ArrayList<>(16);
-        front = rear = 0;
+        front = 0;
+        rear = -1;
     }
 
     @Override
     public void enqueue(E item) {
-        Array.add(rear++, item);
+        Array.add(++rear, item);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class ArrayQueue<E> implements Queue<E> {
         if (front > rear)
             throw new EmptyStackException();
 
-        return Array.get(front++);
+        return Array.set(front++, null);
     }
 
     @Override

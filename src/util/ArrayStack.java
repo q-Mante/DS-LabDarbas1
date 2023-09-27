@@ -18,9 +18,8 @@ public class ArrayStack<E> implements Stack<E> {
         if (len == 0)
             throw new EmptyStackException();
 
-        E temp = Array.get(len - 1);
-        Array.remove(len - 1);
-        return temp;
+        //E temp = Array.get(len - 1);
+        return Array.remove(len - 1);
     }
 
     @Override
