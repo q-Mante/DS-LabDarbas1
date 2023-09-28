@@ -13,6 +13,7 @@ package util;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Koreguota 2015-09-18
@@ -333,9 +334,13 @@ public class LinkedList<E extends Comparable<E>>
     class Iterator implements java.util.Iterator<E> {
 
         private Node<E> iterPosition;
+        private Node<E> prevPosition;
+        private boolean canRemove;
 
         Iterator() {
             iterPosition = first;
+            prevPosition = null;
+            canRemove = false;
         }
 
         @Override
@@ -345,8 +350,16 @@ public class LinkedList<E extends Comparable<E>>
 
         @Override
         public E next() {
+            if (iterPosition != first) {        // previous pointer shifts by situation
+                if (prevPosition == null)
+                    prevPosition = first;
+                else if (prevPosition.next != iterPosition)
+                    prevPosition = prevPosition.next;
+            }
+
             E d = iterPosition.element;
             iterPosition = iterPosition.next;
+            canRemove = true;
             return d;
         }
 
@@ -354,7 +367,7 @@ public class LinkedList<E extends Comparable<E>>
         public void remove() {
             //throw new UnsupportedOperationException("Studentams reikia realizuoti remove()");
 
-            Node<E> delete = first;
+            /*Node<E> delete = first;
             while (delete.next != null && delete.next != iterPosition) {
                 delete = delete.next;
             }
@@ -371,9 +384,25 @@ public class LinkedList<E extends Comparable<E>>
                         }
                     }
                 }
+            }*/
+
+            if (!canRemove) {
+                throw new IllegalStateException("remove() can only be called once after each call to next()");
+            }
+
+            if (prevPosition == null) {     // removing first element
+                first = first.next;
+                if (first == null)  // removed last element
+                    last = null;    // updating last pointer
+            }
+            else {
+                prevPosition.next = iterPosition;   // removing element at middle or at the end
+                if (prevPosition.next == null)  // removed last element
+                    last = prevPosition;    // updating last pointer
             }
 
             size--;
+            canRemove = false;
         }
     }
 

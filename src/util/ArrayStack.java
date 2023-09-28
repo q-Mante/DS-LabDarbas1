@@ -8,7 +8,7 @@ public class ArrayStack<E> implements Stack<E> {
     private ArrayList<E> Array;
 
     public ArrayStack() {
-        Array = new ArrayList<>(16);
+        Array = new ArrayList<>();
     }
 
     @Override

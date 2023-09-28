@@ -5,9 +5,7 @@
  *************************************************************************** */
 package com.ktu;
 
-import util.ArrayStack;
-import util.Ks;
-import util.LinkedListStack;
+import util.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -16,15 +14,202 @@ import java.util.Locale;
 public class ManualTest {
 
     CarList cars = new CarList();
+    ArrayStack<Car> arrayStack = new ArrayStack<>();
+    LinkedListStack<Car> linkedListStack = new LinkedListStack<>();
+    ArrayQueue<Car> arrayQueue = new ArrayQueue<>();
+    LinkedListQueue<Car> linkedListQueue = new LinkedListQueue<>();
+
 
     void execute() {
+        // initial tests
         createCars();
         createCarList();
-//        countRenault();
-//        appendCarList();
-//        checkCarMarketFilters();
-//        checkCarMarketSorting();
+        countRenault();
+        appendCarList();
+        checkCarMarketFilters();
+        checkCarMarketSorting();
+
+        // iterator remove() tests
+//        testIteratorRemove();
+
+        // stack interface implementation tests
+//        createCarArrayStack();
+//        createCarListStack();
+
+        // queue interface implementation tests
+//        createCarArrayQueue();
+//        createCarListQueue();
     }
+
+    void createCarArrayStack() {
+        Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
+        Car c2 = new Car("Renault", "Megane", 2001, 20000, 3500);
+        Car c3 = new Car("Toyota", "Corolla", 2001, 20000, 8500.8);
+        Car c4 = new Car("Renault", "Laguna", 2001, 115900, 7500);
+        Car c5 = new Car("Renault", "Megane", 1946, 365100, 9500);
+        Car c6 = new Car("Honda", "Civic", 2007, 36400, 8500.3);
+
+        Ks.ou(arrayStack.isEmpty());
+        Ks.oun("REZULTATAS: true");
+        arrayStack.push(c1);
+        arrayStack.push(c2);
+        arrayStack.push(c3);
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Toyota Corolla 2001 20000 8500.8");
+        Ks.ou(arrayStack.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        arrayStack.push(c4);
+        Ks.ou(arrayStack.peak());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(arrayStack.isEmpty());
+        Ks.oun("REZULTATAS: false");
+        arrayStack.push(c5);
+        arrayStack.push(c6);
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Honda Civic 2007 36400 8500.3");
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Renault Megane 1946 365100 9500");
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(arrayStack.pop());
+        Ks.oun("REZULTATAS: Renault Laguna 1997 50000 1700");
+        Ks.ou(arrayStack.isEmpty());
+        Ks.oun("REZULTATAS: true");
+    }
+    void createCarListStack() {
+        Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
+        Car c2 = new Car("Renault", "Megane", 2001, 20000, 3500);
+        Car c3 = new Car("Toyota", "Corolla", 2001, 20000, 8500.8);
+        Car c4 = new Car("Renault", "Laguna", 2001, 115900, 7500);
+        Car c5 = new Car("Renault", "Megane", 1946, 365100, 9500);
+        Car c6 = new Car("Honda", "Civic", 2007, 36400, 8500.3);
+
+        Ks.ou(linkedListStack.isEmpty());
+        Ks.oun("REZULTATAS: true");
+        linkedListStack.push(c1);
+        linkedListStack.push(c2);
+        linkedListStack.push(c3);
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Toyota Corolla 2001 20000 8500.8");
+        Ks.ou(linkedListStack.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        linkedListStack.push(c4);
+        Ks.ou(linkedListStack.peak());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(linkedListStack.isEmpty());
+        Ks.oun("REZULTATAS: false");
+        linkedListStack.push(c5);
+        linkedListStack.push(c6);
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Honda Civic 2007 36400 8500.3");
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Renault Megane 1946 365100 9500");
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(linkedListStack.pop());
+        Ks.oun("REZULTATAS: Renault Laguna 1997 50000 1700");
+        Ks.ou(linkedListStack.isEmpty());
+        Ks.oun("REZULTATAS: true");
+    }
+    void createCarArrayQueue() {
+        Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
+        Car c2 = new Car("Renault", "Megane", 2001, 20000, 3500);
+        Car c3 = new Car("Toyota", "Corolla", 2001, 20000, 8500.8);
+        Car c4 = new Car("Renault", "Laguna", 2001, 115900, 7500);
+        Car c5 = new Car("Renault", "Megane", 1946, 365100, 9500);
+        Car c6 = new Car("Honda", "Civic", 2007, 36400, 8500.3);
+
+        Ks.ou(arrayQueue.isEmpty());
+        Ks.oun("REZULTATAS: true");
+        arrayQueue.enqueue(c1);
+        arrayQueue.enqueue(c2);
+        arrayQueue.enqueue(c3);
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Laguna 1997 50000 1700");
+        Ks.ou(arrayQueue.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        arrayQueue.enqueue(c4);
+        Ks.ou(arrayQueue.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(arrayQueue.isEmpty());
+        Ks.oun("REZULTATAS: false");
+        arrayQueue.enqueue(c5);
+        arrayQueue.enqueue(c6);
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Toyota Corolla 2001 20000 8500.8");
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Megane 1946 365100 9500");
+        Ks.ou(arrayQueue.dequeue());
+        Ks.oun("REZULTATAS: Honda Civic 2007 36400 8500.3");
+        Ks.ou(arrayQueue.isEmpty());
+        Ks.oun("REZULTATAS: true");
+    }
+    void createCarListQueue() {
+        Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
+        Car c2 = new Car("Renault", "Megane", 2001, 20000, 3500);
+        Car c3 = new Car("Toyota", "Corolla", 2001, 20000, 8500.8);
+        Car c4 = new Car("Renault", "Laguna", 2001, 115900, 7500);
+        Car c5 = new Car("Renault", "Megane", 1946, 365100, 9500);
+        Car c6 = new Car("Honda", "Civic", 2007, 36400, 8500.3);
+
+        Ks.ou(linkedListQueue.isEmpty());
+        Ks.oun("REZULTATAS: true");
+        linkedListQueue.enqueue(c1);
+        linkedListQueue.enqueue(c2);
+        linkedListQueue.enqueue(c3);
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Laguna 1997 50000 1700");
+        Ks.ou(linkedListQueue.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        linkedListQueue.enqueue(c4);
+        Ks.ou(linkedListQueue.peak());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(linkedListQueue.isEmpty());
+        Ks.oun("REZULTATAS: false");
+        linkedListQueue.enqueue(c5);
+        linkedListQueue.enqueue(c6);
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Megane 2001, 20000, 3500");
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Toyota Corolla 2001 20000 8500.8");
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Laguna 2001 115900 7500");
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Renault Megane 1946 365100 9500");
+        Ks.ou(linkedListQueue.dequeue());
+        Ks.oun("REZULTATAS: Honda Civic 2007 36400 8500.3");
+        Ks.ou(linkedListQueue.isEmpty());
+        Ks.oun("REZULTATAS: true");
+    }
+
+    void testIteratorRemove() {
+        CarList cars0 = new CarList();
+        Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
+        Car c2 = new Car("Renault", "Megane", 2001, 20000, 3500);
+        Car c3 = new Car("Toyota", "Corolla", 2001, 20000, 8500.8);
+        cars0.add(c3);cars0.add(c2);cars0.add(c2);cars0.add(c3);cars0.add(c1);cars0.add(c1);cars0.add(c2);cars0.add(c3);cars0.add(c3);
+
+        cars0.println();
+
+        Iterator<Car> it = cars0.iterator();
+        while (it.hasNext()) {
+            Car element = it.next();
+            if (element.equals(c3)) {
+                it.remove();
+            }
+        }
+
+        cars0.println();
+    }
+
 
     void createCars() {
         Car c1 = new Car("Renault", "Laguna", 1997, 50000, 1700);
@@ -83,45 +268,6 @@ public class ManualTest {
         cars.println("Po visų išmetimų");
         cars.remove(0);
         cars.println("Po visų išmetimų");
-        /*Iterator<Car> it = cars.iterator();
-        while (it.hasNext()) {
-            Car element = it.next();
-            if (element.equals(c3))
-                it.remove();
-        }
-        cars.println();*/
-
-        ArrayStack<Car> a = new ArrayStack<>();
-        Ks.oun(a.isEmpty());
-        a.push(c1);
-        a.push(c2);
-        a.push(c3);
-        Ks.oun(a.pop());
-        Ks.oun(a.peak());
-        a.push(c1);
-        Ks.oun(a.peak());
-        Ks.oun(a.isEmpty());
-        Ks.oun(a.pop());
-        Ks.oun(a.pop());
-        Ks.oun(a.pop());
-        Ks.oun(a.isEmpty());
-
-        Ks.oun("    ");
-
-        LinkedListStack<Car> b = new LinkedListStack<>();
-        Ks.oun(b.isEmpty());
-        b.push(c1);
-        b.push(c2);
-        b.push(c3);
-        Ks.oun(b.pop());
-        Ks.oun(b.peak());
-        b.push(c1);
-        Ks.oun(b.peak());
-        Ks.oun(b.isEmpty());
-        Ks.oun(b.pop());
-        Ks.oun(b.pop());
-        Ks.oun(b.pop());
-        Ks.oun(b.isEmpty());
     }
 
     void countRenault() {
